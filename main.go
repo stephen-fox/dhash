@@ -1,5 +1,6 @@
 // dhash recursively hashes all of the files in a directory and produces
-// a cumulative hash string.
+// a cumulative hash string. It builds on the directory hashing functionality
+// used by the Go compiler.
 package main
 
 import (
@@ -27,7 +28,8 @@ SYNOPSIS
 
 DESCRIPTION
   ` + appName + ` recursively hashes all of the files in a directory and produces
-  a cumulative hash string.
+  a cumulative hash string. It builds on the directory hashing functionality
+  used by the Go compiler.
 
   For more information regarding the go.mod hash type, please refer to:
   https://pkg.go.dev/golang.org/x/mod/sumdb/dirhash

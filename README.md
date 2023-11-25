@@ -1,7 +1,8 @@
 # dhash
 
 dhash recursively hashes all of the files in a directory and produces
-a cumulative hash string.
+a cumulative hash string. It builds on the directory hashing functionality
+used by the Go compiler.
 
 ## Features
 
