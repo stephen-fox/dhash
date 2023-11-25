@@ -7,7 +7,7 @@ a cumulative hash string.
 
 - Hashes all files in a given directory (and child directories)
 - Supports go.mod, SHA-256, and SHA-512 hash types
-- Optionally write each each individual file's hash to the output
+- Optionally write each individual file's hash to the output
 
 ## Examples
 
