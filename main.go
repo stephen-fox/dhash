@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"hash"
 	"io"
-	"io/fs"
 	"log"
 	"os"
 
@@ -232,56 +231,6 @@ func (o *fileHasher) Close() error {
 	}
 
 	return err
-}
-
-func newWalker(newHashFn func() hash.Hash, hashEach bool) *walker {
-	return &walker{
-		hash:      newHashFn(),
-		newHashFn: newHashFn,
-		hashEach:  hashEach,
-	}
-}
-
-type walker struct {
-	hash      hash.Hash
-	newHashFn func() hash.Hash
-	hashEach  bool
-}
-
-func (o *walker) walk(path string, d fs.DirEntry, err error) error {
-	if err != nil {
-		return err
-	}
-
-	if d.IsDir() {
-		return nil
-	}
-
-	f, err := os.Open(path)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	if !o.hashEach {
-		_, err = io.Copy(o.hash, f)
-		return err
-	}
-
-	thisHash := o.newHashFn()
-	tee := io.TeeReader(f, thisHash)
-
-	_, err = io.Copy(o.hash, tee)
-	if err != nil {
-		return nil
-	}
-
-	_, err = os.Stdout.WriteString(path + " - " + hashToString(thisHash) + "\n")
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
 
 func hashToString(h hash.Hash) string {
