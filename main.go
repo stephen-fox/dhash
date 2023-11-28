@@ -121,7 +121,7 @@ func mainWithError() error {
 
 	filePaths, err := dirhash.DirFiles(dirPath, "")
 	if err != nil {
-		return fmt.Errorf("failed to find files in directory %q", dirPath)
+		return fmt.Errorf("failed to find files in directory %q - %w", dirPath, err)
 	}
 
 	var optEachFileOutputFn func(filePath string, h hash.Hash) error
